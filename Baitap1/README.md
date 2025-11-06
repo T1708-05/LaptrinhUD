@@ -1,20 +1,9 @@
 # 📱 Portfolio Android – Vũ Văn Thông
 
 > Ứng dụng Android (Jetpack Compose) giới thiệu **Vũ Văn Thông** – SV năm 3 **Ngành An toàn thông tin, HCMUTE**.  
-> Giao diện hiện đại: splash mượt, nền gradient + hiệu ứng “bubbles”, thẻ glassmorphism, chips kỹ năng và các nút hành động liên hệ/portfolio.
 
 ---
 
-## ✨ Tính năng nổi bật
-
-- 🌊 **Splash** chuyển cảnh mượt (scale + fade).
-- 🎨 **Nền animated** dạng bubbles tạo chiều sâu trên gradient tối.
-- 🧊 **Glass card** hiển thị thông tin:
-  - **Vũ Văn Thông** – SV năm 3 ATTT – **HCMUTE**.
-- 🏷️ **Chips kỹ năng**: An toàn thông tin, CTF, Pentest, Network, Android/Kotlin.
-- 🔗 **CTA**: Portfolio / Gọi / Email / Copy email.
-
----
 
 ## 🎬 Ảnh chụp màn hình
 
@@ -48,7 +37,6 @@ Trong `MainActivity.kt`:
 ```kotlin
 private const val EMAIL = "vuvanthong1708@gmail.com"
 private const val PHONE = "0968046024"
-private const val PORTFOLIO = "https://vanity1412.github.io/portfolio_VVT/"
 ```
 
 Tên app: `res/values/strings.xml`
@@ -59,7 +47,6 @@ Tên app: `res/values/strings.xml`
 ---
 
 ## 🙋‍♂️ Liên hệ
-- **Portfolio**: https://vanity1412.github.io/portfolio_VVT/
 - **Email**: vuvanthong1708@gmail.com
 - **SĐT**: 0968046024
 
