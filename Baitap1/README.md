@@ -1,10 +1,9 @@
-# 📱 Portfolio – Vũ Văn Thông
+# 📱 Vũ Văn Thông
 > Ứng dụng Android giới thiệu **Vũ Văn Thông** – SV năm 3 **Ngành An toàn thông tin, HCMUTE**.  
 
 ---
 ## 🎬 Ảnh chụp màn hình
 
-| Splash | Intro | |gg|
 |---|---|
 | ![Splash](art/1.png) | ![Intro](art/2.png) |   ![gg](art/3.png) |
 
