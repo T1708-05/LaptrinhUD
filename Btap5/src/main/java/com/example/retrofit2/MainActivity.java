@@ -16,7 +16,6 @@ import com.example.retrofit2.adapter.CategoryAdapter;
 import com.example.retrofit2.api.ApiService;
 import com.example.retrofit2.api.RetrofitClient;
 import com.example.retrofit2.model.Category;
-import com.example.retrofit2.model.ProductResponse;
 
 import java.util.List;
 
@@ -52,13 +51,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void GetCategory() {
+        Log.d("logg", "GetCategory() started");
+        Toast.makeText(this, "Đang tải dữ liệu...", Toast.LENGTH_SHORT).show();
+        
         // Gọi Interface trong APIService
         apiService = RetrofitClient.getRetrofit().create(ApiService.class);
-        apiService.getCategoryAll().enqueue(new Callback<List<Category>>() {
+        
+        // Thử endpoint đầu tiên: categories
+        tryEndpoint(apiService.getCategoryAll(), "categories");
+    }
+    
+    private void tryEndpoint(Call<List<Category>> call, String endpointName) {
+        Log.d("logg", "Trying endpoint: " + endpointName);
+        Log.d("logg", "Request URL: " + call.request().url());
+        
+        call.enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
+                Log.d("logg", "onResponse [" + endpointName + "] - Code: " + response.code());
+                
                 if (response.isSuccessful() && response.body() != null) {
-                    categoryList = response.body(); // Nhận mảng
+                    categoryList = response.body();
+                    Log.d("logg", "SUCCESS! Loaded " + categoryList.size() + " items from: " + endpointName);
+                    Toast.makeText(MainActivity.this, "✓ Thành công! " + categoryList.size() + " items", Toast.LENGTH_LONG).show();
+                    
                     // Khởi tạo Adapter
                     categoryAdapter = new CategoryAdapter(MainActivity.this, categoryList);
                     rcCate.setHasFixedSize(true);
@@ -71,15 +87,30 @@ public class MainActivity extends AppCompatActivity {
                     categoryAdapter.notifyDataSetChanged();
                 } else {
                     int statusCode = response.code();
-                    // Handle request errors depending on status code
-                    Toast.makeText(MainActivity.this, "Lỗi: " + statusCode, Toast.LENGTH_SHORT).show();
+                    Log.e("logg", "Failed [" + endpointName + "] - Code: " + statusCode);
+                    
+                    // Nếu 404, thử endpoint khác
+                    if (statusCode == 404) {
+                        Toast.makeText(MainActivity.this, "Thử endpoint khác...", Toast.LENGTH_SHORT).show();
+                        if (endpointName.equals("categories")) {
+                            tryEndpoint(apiService.getCategoryPhp(), "categories.php");
+                        } else if (endpointName.equals("categories.php")) {
+                            tryEndpoint(apiService.getApiCategories(), "api/categories");
+                        } else if (endpointName.equals("api/categories")) {
+                            tryEndpoint(apiService.getCategory(), "category");
+                        } else {
+                            Toast.makeText(MainActivity.this, "Không tìm thấy endpoint nào hoạt động!", Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        Toast.makeText(MainActivity.this, "Lỗi " + statusCode, Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
-                Log.d("logg", t.getMessage());
-                Toast.makeText(MainActivity.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("logg", "API Error [" + endpointName + "]: " + t.getMessage(), t);
+                Toast.makeText(MainActivity.this, "Lỗi: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

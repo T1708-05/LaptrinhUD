@@ -1,7 +1,6 @@
 package com.example.retrofit2.api;
 
 import com.example.retrofit2.model.Category;
-import com.example.retrofit2.model.ProductResponse;
 
 import java.util.List;
 
@@ -13,7 +12,12 @@ public interface ApiService {
     @GET("categories")
     Call<List<Category>> getCategoryAll();
     
-    // Hoặc có thể là:
-    // @GET("api/categories")
-    // @GET("category")
+    @GET("categories.php")
+    Call<List<Category>> getCategoryPhp();
+    
+    @GET("api/categories")
+    Call<List<Category>> getApiCategories();
+    
+    @GET("category")
+    Call<List<Category>> getCategory();
 }

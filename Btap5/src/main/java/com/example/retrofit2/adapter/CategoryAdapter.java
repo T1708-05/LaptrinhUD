@@ -30,9 +30,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_category, null);
-        MyViewHolder myViewHolder = new MyViewHolder(view);
-        return myViewHolder;
+                .inflate(R.layout.item_category, parent, false);
+        return new MyViewHolder(view);
     }
 
     @Override
@@ -40,10 +39,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
         Category category = array.get(position);
         holder.tenSp.setText(category.getName());
         
-        // Load ảnh với Glide
-        Glide.with(context)
-                .load(category.getImages())
-                .into(holder.images);
+        // Load ảnh với Glide - xử lý cả HTTP và HTTPS
+        if (category.getImages() != null && !category.getImages().isEmpty()) {
+            Glide.with(context)
+                    .load(category.getImages())
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.ic_launcher_background)
+                    .into(holder.images);
+        } else {
+            holder.images.setImageResource(R.drawable.ic_launcher_background);
+        }
     }
 
     @Override
