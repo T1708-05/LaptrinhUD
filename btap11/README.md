@@ -12,7 +12,7 @@
 
 <div align="center">
   <img src="img/add_todo.png" width="250" alt="Thêm công việc"/>
-  <img src="img/todo_completed.png" width="250" alt="Công việc hoàn thành"/>
+  <img src="img/cautrucfile.png" width="250" alt="Công việc hoàn thành"/>
 </div>
 
 ## 🎯 Tính Năng
@@ -431,3 +431,4 @@ in the Software without restriction...
   
   Made with ❤️ using Kotlin & MVVM
 </div>
+
