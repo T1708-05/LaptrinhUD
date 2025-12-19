@@ -15,15 +15,6 @@
   <img src="img/cautrucfile.png" width="250" alt="Công việc hoàn thành"/>
 </div>
 
-## 🎯 Tính Năng
-
-- ✅ **Đăng ký tài khoản** với validation đầy đủ
-- ✅ **Đăng nhập** xác thực qua SQLite database
-- ✅ **Thêm công việc** với tiêu đề và mô tả
-- ✅ **Đánh dấu hoàn thành** công việc
-- ✅ **Xóa công việc** với dialog xác nhận
-- ✅ **Hiển thị thời gian** tạo công việc
-- ✅ **Lưu trữ offline** với Room Database
 
 ## 🏗️ Kiến Trúc MVVM
 
@@ -45,4 +36,5 @@
 │  (Data, Repository, Database)           │
 └─────────────────────────────────────────┘
 ```
+
 
